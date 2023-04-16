@@ -8,24 +8,24 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="ChatGPT.Net" Version="2.0.0"/>
-        <PackageReference Include="ChessDotNet" Version="0.12.3"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1"/>
+        <PackageReference Include="ChatGPT.Net" Version="2.0.0" />
+        <PackageReference Include="ChessDotNet" Version="0.12.3" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="Settings\appSettings.json"/>
+        <None Remove="Settings\appSettings.json" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="appSettings.json"/>
+        <None Remove="appSettings.json" />
         <Content Include="appSettings.json">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Questions\black.txt"/>
-        <None Remove="Questions\white.txt"/>
+        <None Remove="Questions\black.txt" />
+        <None Remove="Questions\white.txt" />
         <Content Include="RequestTemplates\request.txt">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
