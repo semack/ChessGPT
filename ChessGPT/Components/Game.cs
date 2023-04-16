@@ -1,8 +1,6 @@
-using System.Globalization;
 using ChatGPT.Net;
 using ChessDotNet;
 using ChessGPT.Abstract;
-using ChessGPT.Enums;
 using ChessGPT.Settings;
 using Microsoft.Extensions.Options;
 using File = System.IO.File;
@@ -12,8 +10,8 @@ namespace ChessGPT.Components;
 public class Game : IGame
 {
     private readonly IBoard _board;
-    private readonly ChessGame _chessGame;
     private readonly ChatGpt _chatGpt;
+    private readonly ChessGame _chessGame;
     private readonly ChatGptSettings _settings;
 
     public Game(IBoard board, ChessGame chessGame, ChatGpt chatGpt, IOptions<ChatGptSettings> options)
@@ -51,10 +49,10 @@ public class Game : IGame
         _chessGame.MakeMove(move, true);
         await Task.CompletedTask;
     }
-    
+
     private async Task<string> GetMoveFromChatAsync(ChessGame chessGame)
     {
-        var filePath = Path.Combine(_settings.RequestTemplate);
+        var filePath = Path.Combine(_settings.RequestTemplate!);
         var template = await File.ReadAllTextAsync(filePath);
         var question = string.Format(template, chessGame.GetFen());
         var answer = await _chatGpt.Ask(question);

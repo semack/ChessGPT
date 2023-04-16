@@ -14,7 +14,7 @@ namespace ChessGPT;
 
 class Program
 {
-    static async Task Main(string[] args)
+    private static async Task Main(string[] args)
     {
         var host = CreateHostBuilder(args).Build();
 
@@ -22,11 +22,12 @@ class Program
         await host.RunAsync();
     }
 
-    private static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
+    private static IHostBuilder CreateHostBuilder(string[] args)
+    {
+        return Host.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration((_, configuration) =>
             {
-                configuration.AddJsonFile("appSettings.json", optional: false, reloadOnChange: true);
+                configuration.AddJsonFile("appSettings.json", false, true);
             })
             .ConfigureServices((context, services) =>
             {
@@ -40,14 +41,15 @@ class Program
                 {
                     var chatGptSettings = context.Configuration.GetSection(nameof(ChatGptSettings))
                         .Get<ChatGptSettings>()!;
-                    
-                    return new ChatGpt(chatGptSettings.ApiKey,
+
+                    return new ChatGpt(chatGptSettings.ApiKey!,
                         new ChatGptOptions
                         {
-                            Model = chatGptSettings.Model,
-                            BaseUrl = chatGptSettings.BaseUrl
+                            Model = chatGptSettings.Model!,
+                            BaseUrl = chatGptSettings.BaseUrl!
                         });
                 });
                 services.AddHostedService<GameService>();
             });
+    }
 }

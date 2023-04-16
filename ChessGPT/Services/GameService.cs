@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace ChessGPT.Services;
 
-public class GameService: BackgroundService
+public class GameService : BackgroundService
 {
     private readonly IGame _game;
 
@@ -11,7 +11,7 @@ public class GameService: BackgroundService
     {
         _game = game;
     }
-    
+
     protected override async Task ExecuteAsync(CancellationToken token)
     {
         await _game.StartAsync(token);
