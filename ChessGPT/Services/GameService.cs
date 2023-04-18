@@ -1,4 +1,4 @@
-using ChessGPT.Abstract;
+using ChessGPT.Interfaces;
 using Microsoft.Extensions.Hosting;
 
 namespace ChessGPT.Services;

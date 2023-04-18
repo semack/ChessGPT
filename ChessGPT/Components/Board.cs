@@ -1,4 +1,4 @@
-using ChessGPT.Abstract;
+using ChessGPT.Interfaces;
 
 namespace ChessGPT.Components;
 

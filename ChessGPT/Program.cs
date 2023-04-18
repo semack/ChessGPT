@@ -1,8 +1,8 @@
 ﻿using ChatGPT.Net;
 using ChatGPT.Net.DTO.ChatGPT;
 using ChessDotNet;
-using ChessGPT.Abstract;
 using ChessGPT.Components;
+using ChessGPT.Interfaces;
 using ChessGPT.Services;
 using ChessGPT.Settings;
 using Microsoft.Extensions.Configuration;

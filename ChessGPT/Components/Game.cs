@@ -1,6 +1,6 @@
 using ChatGPT.Net;
 using ChessDotNet;
-using ChessGPT.Abstract;
+using ChessGPT.Interfaces;
 using ChessGPT.Settings;
 using Microsoft.Extensions.Options;
 using File = System.IO.File;
@@ -30,9 +30,11 @@ public class Game : IGame
             while (!token.IsCancellationRequested)
             {
                 var answer = await GetMoveFromChatAsync(_chessGame);
-                await MakeMoveAsync(answer);
+                var gameAlive = await MakeMoveAsync(answer);
                 await InvalidateBoardAsync(token);
                 await Task.Delay(15000, token);
+                if (!gameAlive)
+                    break;
             }
         }
         catch (Exception e)
@@ -42,12 +44,12 @@ public class Game : IGame
         }
     }
 
-    private async Task MakeMoveAsync(string answer)
+    private async Task<bool> MakeMoveAsync(string answer)
     {
         var positions = answer.Split('-');
         var move = new Move(positions[0], positions[1], _chessGame.WhoseTurn);
         _chessGame.MakeMove(move, true);
-        await Task.CompletedTask;
+        return await Task.FromResult(true); // TODO: analyze game status
     }
 
     private async Task<string> GetMoveFromChatAsync(ChessGame chessGame)

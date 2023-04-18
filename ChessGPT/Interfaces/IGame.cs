@@ -1,4 +1,4 @@
-namespace ChessGPT.Abstract;
+namespace ChessGPT.Interfaces;
 
 public interface IGame
 {
