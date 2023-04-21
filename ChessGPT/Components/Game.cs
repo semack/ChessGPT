@@ -32,9 +32,10 @@ public class Game : IGame
                 var answer = await GetMoveFromChatAsync(_chessGame);
                 var gameAlive = await MakeMoveAsync(answer);
                 await InvalidateBoardAsync(token);
-                await Task.Delay(15000, token);
+                Console.WriteLine($"\nLast move: {answer}");
                 if (!gameAlive)
                     break;
+                await Task.Delay(15000, token); //delay for the calling api
             }
         }
         catch (Exception e)
@@ -49,7 +50,9 @@ public class Game : IGame
         var positions = answer.Split('-');
         var move = new Move(positions[0], positions[1], _chessGame.WhoseTurn);
         _chessGame.MakeMove(move, true);
-        return await Task.FromResult(true); // TODO: analyze game status
+        var gameAlive = !_chessGame.IsCheckmated(_chessGame.WhoseTurn) &&
+                        !_chessGame.IsStalemated(_chessGame.WhoseTurn);
+        return await Task.FromResult(gameAlive);
     }
 
     private async Task<string> GetMoveFromChatAsync(ChessGame chessGame)

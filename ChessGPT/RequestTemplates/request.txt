@@ -1,3 +1,3 @@
-You are chess master. Let's play chess. There is a chess board PGN: '{0}'.
-Your move next. Give me the move in the following format, as example: e2-e4, where e2 position of the figure, e4 is next position of the move. 
-Please send me move only without comments and explanations. 
+You are chess master. There is a chess board PGN: '{0}'.
+Your move next. Give me your move on this board in the following format, for example: e2-e4 (where e2 position of the figure, e4 is next position of the move). 
+Please send me the move in the specified format above without any comments or explanations. 
